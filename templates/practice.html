@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Voice Beyond Sound - Practice Mode</title>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#111;
+  color:white;
+}
+.container{
+  display:flex;
+  height:100vh;
+}
+.left{
+  width:60%;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.left img{
+  width:95%;
+  height:95%;
+  object-fit:contain;
+}
+.right{
+  width:40%;
+  padding:20px;
+}
+#transcript{
+  margin-top:15px;
+  padding:10px;
+  min-height:120px;
+  background:#222;
+  border-radius:8px;
+  font-size:18px;
+}
+button{
+  padding:10px 16px;
+  margin:5px;
+  font-size:16px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT BLACK BOX -->
+  <div class="left">
+    <img src="/video_feed">
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+    <h2>Practice Mode</h2>
+
+    <div>
+      <button onclick="setMode('SPELL')">Spell Mode</button>
+      <button onclick="setMode('WORD')">Word Mode</button>
+    </div>
+
+    <h3>Live Transcript</h3>
+    <div id="transcript">Waiting for signs...</div>
+  </div>
+
+</div>
+
+<script>
+const socket = io();
+let transcript = "";
+
+socket.on("transcript", t => {
+  transcript += t;
+  document.getElementById("transcript").innerText = transcript;
+});
+
+function setMode(mode){
+  fetch("/mode",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({mode})
+  });
+}
+</script>
+
+</body>
+</html>
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Practice Mode</title>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<style>
+body{margin:0;font-family:Arial}
+.container{display:flex;height:100vh}
+.left{width:60%;background:black}
+.left img{width:100%;height:100%;object-fit:cover}
+.right{width:40%;padding:20px}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="left">
+    <img src="http://127.0.0.1:5000/video_feed">
+  </div>
+
+  <div class="right">
+    <h3>Detected Text</h3>
+    <div id="text">Waiting…</div>
+    <button onclick="setMode('SPELL')">Spell</button>
+    <button onclick="setMode('WORD')">Word</button>
+  </div>
+</div>
+
+<script>
+const socket = io("http://127.0.0.1:5000");
+socket.on("transcript_update", d=>{
+  document.getElementById("text").innerText = d.text;
+});
+
+function setMode(mode) {
+    fetch("/mode", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode: mode })
+    })
+    .then(res => res.json())
+    .then(data => console.log("Mode changed to:", data.mode));
+}
+
+</script>
+
+</body>
+</html>
+ -->

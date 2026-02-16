@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Beyond Sound - Online Meeting</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fa;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      width: 900px;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 40px;
+    }
+
+    .box {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      width: 100%;
+      border: none;
+      background: #4a6cf7;
+      color: white;
+      font-size: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #3b5de0;
+    }
+
+    .meeting-id {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- CREATE MEETING -->
+  <div class="box">
+    <h2>📢 Create Meeting</h2>
+    <p>Start a new online meeting and share the Meeting ID</p>
+
+    <button onclick="createMeeting()">Create Meeting</button>
+
+    <div class="meeting-id" id="createdId"></div>
+  </div>
+
+  <!-- JOIN MEETING -->
+  <div class="box">
+    <h2>🔑 Join Meeting</h2>
+    <p>Enter Meeting ID to join an existing session</p>
+
+    <input type="text" id="joinId" placeholder="Enter Meeting ID">
+    <input type="text" id="username" placeholder="Your Name">
+
+    <button onclick="joinMeeting()">Join Meeting</button>
+  </div>
+
+</div>
+
+<script>
+  function createMeeting() {
+    fetch("http://127.0.0.1:5000/meeting/create", {
+      method: "POST"
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("createdId").innerText =
+        "Meeting ID: " + data.meeting_id;
+
+      sessionStorage.setItem("meeting_id", data.meeting_id);
+      sessionStorage.setItem("role", "host");
+    });
+  }
+
+  function joinMeeting() {
+    const meetingId = document.getElementById("joinId").value;
+    const username = document.getElementById("username").value;
+
+    if (!meetingId || !username) {
+      alert("Please enter Meeting ID and Name");
+      return;
+    }
+
+    sessionStorage.setItem("meeting_id", meetingId);
+    sessionStorage.setItem("username", username);
+    sessionStorage.setItem("role", "participant");
+
+    window.location.href = "{{ url_for('presentation') }}";
+  }
+</script>
+
+</body>
+</html>

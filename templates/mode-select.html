@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Beyond Sound - Choose Mode</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/main.css') }}">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fa;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(180deg, #7af6ee, #eafffe);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .card-container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      width: 250px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Choose Communication Mode</h1>
+    <p>Select how you want to use Sign2Connect</p>
+
+    <div class="card-container">
+
+      <div class="card" onclick="goPractice()">
+        <h2>🧠 Practice Mode</h2>
+        <p>Practice sign language with live detection and speech output</p>
+      </div>
+
+      <div class="card" onclick="goPresentation()">
+        <h2>📊 Presentation Mode</h2>
+        <p>Present with sign language, slides, and live captions</p>
+      </div>
+
+      <div class="card" onclick="goMeeting()">
+        <h2>🌐 Online Meeting</h2>
+        <p>Create or join meetings with shared slides and Q&A</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function goPractice() {
+     window.location.href = "{{ url_for('practice') }}";
+    }
+
+    function goPresentation() {
+      window.location.href = "{{ url_for('presentation') }}";
+    }
+
+    function goMeeting() {
+      window.location.href = "{{ url_for('meeting_setup') }}";;
+    }
+  </script>
+
+</body>
+</html>

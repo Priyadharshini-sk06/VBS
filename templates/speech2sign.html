@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign2Connect – Speech to Sign</title>
+
+  <!-- REQUIRED for desktop layout -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ Bootstrap CDN (FORCE GRID TO WORK) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/speech2sign.css') }}">
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+  <!-- Header -->
+  <div class="header text-center">
+    <h2>AI Speech to Sign Language</h2>
+    <p class="subtitle">Live Speech Recognition with 3D Sign Avatar</p>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls row">
+    <div class="col-md-3">
+      <label>Spoken Language</label>
+      <select id="spokenLang" class="form-select">
+        <option value="en-IN">English</option>
+        <option value="ta-IN">Tamil</option>
+        <option value="hi-IN">Hindi</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label>Sign Language</label>
+      <select id="signLang" class="form-select">
+        <option value="ASL">ASL</option>
+        <option value="ISL">ISL</option>
+        <option value="BSL">BSL</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- MAIN WORK AREA -->
+  <div class="row mt-4 work-area">
+
+    <!-- LEFT PANEL -->
+    <div class="col-md-4">
+      <div class="presentation-box h-100">
+        <input type="file" id="pptUpload" class="form-control mb-3" accept=".ppt,.pptx">
+
+        <div class="slide-viewer">
+          <span>Uploaded slides will appear here</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="col-md-8 d-flex flex-column">
+
+      <!-- Transcript -->
+      <div class="transcript-box fixed-transcript mb-3">
+        <h5>Live Transcript</h5>
+        <p id="transcriptText">Start speaking to see text here...</p>
+      </div>
+
+      <!-- Avatar -->
+      <div class="avatar-box fixed-avatar flex-grow-1">
+        <canvas id="avatarCanvas"></canvas>
+        <p class="avatar-label">3D Sign Avatar</p>
+      </div>
+    </div>
+  </div>
+  <!-- Buttons -->
+  <div class="action-buttons mt-4 text-center">
+    <button class="btn btn-success" id="startBtn">🎙 Start Listening</button>
+    <button class="btn btn-danger" id="stopBtn">⏹ Stop</button>
+  </div>
+
+</div>
+
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='JAVASCRIPT/presentation.js') }}"></script>
+
+</body>
+</html>

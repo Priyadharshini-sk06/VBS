@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Beyond Sound - Presentation</title>
+  <link rel="stylesheet" href="../static/CSS/presentation.css">
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT : PPT -->
+  <div class="left">
+    <h3>Presentation</h3>
+
+    <input type="file" id="ppt" accept=".pptx">
+    <button onclick="uploadPPT()">Upload</button>
+
+    <div id="ppt-text" style="margin-top:15px;color:white">
+      Upload PPT to view slides
+    </div>
+    <div id="pptslides"></div>
+
+  </div>
+
+  <!-- RIGHT-->
+  <div class="right">
+
+    <!-- TRANSCRIPT -->
+    <div class="transcript">
+      <h3>Live Transcript</h3>
+      <div id="text">Waiting for sign…</div>
+
+      <button onclick="setMode('SPELL')">Spell</button>
+      <button onclick="setMode('WORD')">Word</button>
+      <button onclick="setMode('QA')">Ask</button>
+    </div> 
+
+    <!-- BOTTOM -->
+    <div class="bottom">
+
+      <!-- WEBCAM -->
+      <div class="video">
+        <img id="sign-feed" src="/video_feed">
+      </div>
+
+      <!-- QA -->
+      <div class="qa">
+        <b>Q&A Session</b>
+        <div id="qa-box">No questions yet</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= JS ================= -->
+<!-- 
+<script>
+let slides = [];
+let idx = 0;
+
+const socket = io();
+let transcript = "";
+
+function uploadPPT() {
+  const file = document.getElementById("ppt").files[0];
+  const formData = new FormData();
+  formData.append("ppt", file);
+
+  fetch("/upload-ppt", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("pptslides");
+    container.innerHTML = "";
+
+    data.slides.forEach(img => {
+      const image = document.createElement("img");
+      image.src = "/uploads/slides/" + img;
+      image.style.width = "100%";
+      container.appendChild(image);
+    });
+  });
+}
+</script>
+
+<script>
+function show(){
+  document.getElementById("ppt-text").innerText = slides[idx] || "";
+}
+
+function setMode(mode){
+  fetch("/mode", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ mode })
+  });
+}
+
+socket.on("transcript", t => {
+  transcript += t;
+  document.getElementById("text").innerText = transcript;
+});
+</script> -->
+
+<script>
+const socket = io();
+let transcript = "";
+
+function uploadPPT() {
+  const file = document.getElementById("ppt").files[0];
+  const formData = new FormData();
+  formData.append("ppt", file);
+
+  fetch("/upload-ppt", { method:"POST", body:formData })
+  .then(res => res.json())
+  .then(data => {
+    const box = document.getElementById("pptslides");
+    box.innerHTML = "";
+    data.slides.forEach(s => {
+      const img = document.createElement("img");
+      img.src = "/uploads/slides/" + s;
+      img.style.width = "100%";
+      box.appendChild(img);
+    });
+  });
+}
+
+function setMode(mode) {
+  fetch("/mode", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({mode})
+  });
+}
+
+socket.on("transcript", t => {
+  transcript += t;
+  document.getElementById("text").innerText = transcript;
+});
+</script>
+</body>
+</html>

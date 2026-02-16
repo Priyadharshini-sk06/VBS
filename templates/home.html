@@ -1,0 +1,149 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign2connect</title>
+    <link rel="stylesheet" href="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/style.css">
+</head>
+<body>
+    <div class="navigation-bar">
+        <nav class="navbar navbar-expand-lg navbar-dark ">
+            <div class="container" style="background-color: skyblue;">
+
+                <a class="navbar-brand" href="index.html">Sign2Connect</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link " href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link " href="#guide">User Guide</a></li>
+                        <li class="nav-item"><a class="nav-link " href="#bus">Login</a></li>
+                        <li class="nav-item"><a class="nav-link " href="#pooja">Register</a></li>
+                     
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+    </div> -->
+
+<!-- <script src="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Beyond Sound</title>
+
+    <link rel="stylesheet" href="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+</head>
+
+<body style=" background: linear-gradient(180deg, #ffffff, #f4ffff); ">
+
+    <!-- menu bar/navigation bar -->
+    <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container-fluid px-4" style="background: linear-gradient(180deg, #7af6ee, #eafffe);padding: 20px;">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="#">Voice Beyond Sound</a>
+
+            <!-- Mobile toggle -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#mobileMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="collapse navbar-collapse d-none d-lg-flex">
+
+                <!-- Center menu -->
+                <ul class="navbar-nav mx-auto gap-4">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
+                </ul>
+
+                <!-- Right buttons -->
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-sm"
+                        style="font-size: 20px;">Register</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-sm"
+                        style="font-size: 20px;">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header">
+            <h6 class="offcanvas-title">Menu</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body" style="background: linear-gradient(180deg, #7af6ee, #eafffe);">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
+                <hr>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- home -->
+    <section id="home">
+        <div class="container">
+            <div class="intropg">
+                <h1>Voice Beyond Sound</h1>
+                <p>An inclusive presentation bridge between Sign and Speech</p>
+             <a href="{{ url_for('choose_mode', mode='sign2speak') }}" class="btn action-btn">Sign → Speech</a>
+
+            <a href="{{ url_for('choose_mode', mode='speech2sign') }}" class="btn action-btn">Speech → Sign</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- user guide -->
+    <!-- <section>
+        <div class="container">
+            <div class="image-fluid guideimg">
+                <img src="../static/IMAGES/guide_flowchart.png" alt="user guide">
+            </div>
+        </div>
+    </section> -->
+
+    <!-- footer -->
+    <section class="footer" style="background: linear-gradient(180deg, #7af6ee, #eafffe);text-align:center;">
+        <div class="container">
+            <footer style="padding: 20px;;">
+                <h6 style="text-align: center;">Bridging communication between sign language and speech</h6>
+                <a href="{{ url_for('connectwithus') }}" style="text-decoration: none;color: black;" class="reachus">Reach
+                    us</a>
+                <hr>
+                <p style="text-align: center;">© 2025 Voice Beyond Sound | Built for Inclusive Communication.</p>
+
+            </footer>
+        </div>
+
+    </section>
+
+    <script src="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

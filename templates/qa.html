@@ -1,0 +1,99 @@
+<!-- <button id="micBtn">🎤 Ask Question</button>
+<button id="exitBtn">⬅ Back to Sign Mode</button>
+
+<div id="qa-chat"></div>
+
+<script src="../js/qa.js"></script> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Q&A Session</title>
+</head>
+<body>
+
+<div style="display:flex;height:90vh">
+
+  <!-- Left: Chat -->
+  <div style="width:40%;border-right:2px solid #ccc;padding:10px">
+    <h3>Audience Questions</h3>
+    <div id="questions"></div>
+  </div>
+
+  <!-- Right: Presenter -->
+  <div style="width:60%;padding:10px">
+    <h3>Presenter Response</h3>
+    <img id="webcam" src="/video_feed" width="100%">
+    <div id="answerText"></div>
+  </div>
+
+</div>
+
+<div>
+  <button onclick="nextQuestion()">Next Question</button>
+  <button onclick="repeatQuestion()">Repeat</button>
+  <button onclick="endQA()">End Q&A</button>
+</div>
+
+<!-- socket -->
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+<!-- logic -->
+<script>
+function nextQuestion() {
+  listenQuestion();
+  document.getElementById("answerText").innerHTML = "";
+}
+
+function repeatQuestion() {
+  const qBox = document.getElementById("questions");
+  if (!qBox.lastChild) return;
+
+  const qs = qBox.lastChild.innerText;
+  fetch("/tts", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ text: qs })
+  });
+}
+
+function endQA() {
+  fetch("/mode", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ mode: "SPELL" })
+  });
+  window.location.href = "/";
+}
+</script>
+
+<script>
+async function listenQuestion() {
+  const res = await fetch("http://localhost:5000/qa/listen", {
+    method: "POST"
+  });
+  const data = await res.json();
+  document.getElementById("questions").innerHTML +=
+    `<p>${data.question}</p>`;
+}
+
+setInterval(listenQuestion, 6000);
+
+fetch("/mode", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ mode: "QA" })
+});
+
+const socket = io();
+
+socket.on("qa_answer", letter => {
+  document.getElementById("answerText").innerHTML += letter;
+});
+
+socket.on("qa_complete", answer => {
+  document.getElementById("answerText").innerHTML += "<br><b>Final:</b> " + answer + "<hr>";
+});
+</script>
+</body>
+</html>

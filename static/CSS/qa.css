@@ -1,0 +1,15 @@
+#chatPanel {
+  width: 30%;
+  height: 100%;
+  border-left: 2px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#chatMessages {
+  font-size: 14px;
+  background: #f9f9f9;
+  padding: 10px;
+  height: 80%;
+  overflow-y: auto;
+}
