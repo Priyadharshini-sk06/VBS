@@ -70,7 +70,7 @@
 
       <!-- Avatar -->
       <div class="avatar-box fixed-avatar flex-grow-1">
-        <canvas id="avatarCanvas"></canvas>
+        <img id="signDisplay" style="width:100%; height:100%; object-fit:contain;">
         <p class="avatar-label">3D Sign Avatar</p>
       </div>
     </div>
@@ -79,13 +79,25 @@
   <div class="action-buttons mt-4 text-center">
     <button class="btn btn-success" id="startBtn">🎙 Start Listening</button>
     <button class="btn btn-danger" id="stopBtn">⏹ Stop</button>
-  </div>
+    <button class="btn btn-warning" onclick="testSign()">Test A Sign</button>  </div>
 
 </div>
+<!-- THREE (stable version) -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+ GLTF loader 
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script> -->
 
+<!-- YOUR AVATAR FILE -->
+<script src="{{ url_for('static', filename='JAVASCRIPT/avatar.js') }}"></script>
 
-<!-- JS -->
+<!-- SPEECH -->
 <script src="{{ url_for('static', filename='JAVASCRIPT/presentation.js') }}"></script>
+
+<script>
+function testSign(){
+    document.getElementById("signDisplay").src ="/static/avatar/ASL/alphabet/A.gif";
+}
+</script>
 
 </body>
 </html>
