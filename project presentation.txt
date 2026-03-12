@@ -1,0 +1,275 @@
+project presentation
+prompt
+
+
+
+SIGN2CONNECT — COMPLETE END-TO-END FLOW
+🟢 0️⃣ ENTRY POINT — LANDING PAGE
+Page Name
+Landing Page / Home
+
+Purpose
+Introduce Sign2Connect and guide users into the correct experience.
+
+Layout
+Top Navbar
+
+Logo: Sign2Connect
+
+Menu:
+
+Home
+
+How It Works
+
+Features
+
+Demo
+
+Contact
+
+Hero Section
+
+Title:
+“Sign2Connect — Real-Time Sign Language Communication Platform”
+
+Subtitle:
+Convert sign language into speech & text for presentations, meetings, and live Q&A
+
+Buttons:
+
+Start Presentation
+
+Join Online Meeting
+
+Watch Demo
+
+Why Section
+
+Icons + text:
+
+🎥 Real-time sign detection
+
+🔊 Text to speech
+
+🎤 Audience Q&A
+
+🌐 Online meetings support
+
+🟡 1️⃣ MODE SELECTION PAGE
+Page Name
+Choose Your Session Type
+
+Purpose
+User decides where they are communicating.
+
+Layout (3 Large Cards)
+Card 1 — Presentation Mode
+Icon: 📊
+
+Text:
+
+For classrooms, seminars, offline presentations
+
+Button: Start Presentation
+
+Card 2 — Online Meeting Mode ⭐ (IMPORTANT)
+Icon: 💻
+
+Text:
+
+Use Sign2Connect inside video meetings
+
+Supported Platforms:
+
+Zoom
+
+Google Meet
+
+Microsoft Teams
+
+Button: Join Online Meeting
+
+Card 3 — Practice / Demo Mode
+Icon: ✋
+
+Text:
+
+Try sign detection without audience
+
+Button: Try Demo
+
+🔵 2️⃣ ONLINE MEETING MODE — SETUP PAGE ⭐
+Page Name
+Online Meeting Setup
+
+Purpose
+Prepare Sign2Connect to run alongside Zoom/Meet.
+
+Layout
+Left Panel
+
+Camera Preview (Presenter webcam)
+
+Hand landmarks overlay
+
+Right Panel
+
+Settings:
+
+Select Camera
+
+Select Microphone
+
+Output Language
+
+Toggle:
+
+Enable Spell Mode
+
+Enable Word Mode
+
+Bottom Button
+
+Enter Meeting Overlay
+
+🔵 3️⃣ ONLINE MEETING MODE — LIVE OVERLAY SCREEN ⭐
+⚠️ This is NOT a chat page
+This is a sign-to-speech overlay used while Zoom/Meet is running.
+
+Page Name
+Online Meeting Overlay
+
+Layout (IMPORTANT FOR FIGMA)
+🧩 LEFT SIDE (Chat / Captions Panel)
+Auto-generated captions from sign detection
+
+Audience Q&A messages appear here
+
+Scrollable message list
+
+🧩 CENTER (Optional / Hidden)
+(No PPT here — meeting already has slides)
+
+🧩 RIGHT SIDE (Presenter Panel)
+Top
+
+Detected Text Output
+
+“Hello everyone”
+“Thank you”
+
+Middle
+
+Webcam feed (sign detection)
+
+Bottom
+
+Mode indicator:
+
+SPELL
+
+WORD
+
+Q&A
+
+🧩 BOTTOM CONTROL BAR
+🎤 Enable Q&A
+
+🔄 Switch Mode
+
+⏸ Pause Detection
+
+❌ Exit Meeting Mode
+
+🟠 4️⃣ PRESENTATION MODE — LIVE SESSION
+Page Name
+Presentation Session
+
+Layout
+Center Panel
+
+PPT / Slides (Optional)
+
+Can be hidden (you already decided this)
+
+Right Panel
+
+Webcam (sign detection)
+
+Detected text
+
+Speech output indicator
+
+Bottom Bar
+
+Switch to Q&A
+
+End Presentation
+
+Download Transcript
+
+🔴 5️⃣ Q&A MODE — AUDIENCE INTERACTION
+Page Name
+Q&A Session
+
+Audience View (Web)
+Chat-style interface
+
+Button:
+
+🎤 Ask Question
+
+Questions appear as text bubbles
+
+Presenter View (System)
+Webcam detection paused
+
+Screen shows:
+
+Audience Question (big readable text)
+
+Button:
+
+Resume Sign Response
+
+🟣 6️⃣ RESPONSE FLOW (IMPORTANT)
+Presenter Response
+Presenter switches back to:
+
+Spell Mode OR
+
+Word Mode
+
+Signs answer
+
+Speech output plays automatically
+
+Text appears in chat/captions panel
+
+⚫ 7️⃣ SESSION END PAGE
+Page Name
+Session Summary
+
+Layout
+Transcript of:
+
+Detected signs
+
+Q&A
+
+Buttons:
+
+Download Transcript
+
+Start New Session
+
+Exit
+
+🧠 8️⃣ TECH FLOW (FOR FIGMA NOTES)
+Camera → MediaPipe → ML Model → Text
+Text → Speech Engine → Audio Output
+
+Audience Voice → Speech Recognition → Text
+Text → Display to Presenter
+Presenter Signs → Speech → Audience

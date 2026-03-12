@@ -1,0 +1,44 @@
+sign to speak:
+tech stack used
+1.html css js-selects mode ,ppt upload,displays video wen webcam is turned on,live transcript,qa session -makes ui visible.
+
+js-(handles dynamic behaviour)updating caption in real time,
+   3 modes switch ,trigerring speech o/p,flask backend helps to fetch data
+
+
+2.flask-light weight ,easy to connect with ml model,bridge for frontend and ml model,serves url,handles api request,calls ml,returns prediction.
+
+3.python- helps in easy integ with mediapipe
+
+4.ml-recog hand sign -auto,hand landmarks takes as i/p and classifies it as words numbers,comments.captures landmark and converts it into numeric features,trains classifier,predicts sign on real time
+sign lang gestures are recog  by learning pattern from landmarks.
+
+algo used-supervised learning classifier-trained on labeled hand landmarks data.
+random forest - see
+svm-ml-see
+
+
+
+
+ai tools-media pipe-ai based hand landmark detec
+trained ml model-gesture classif
+chatgpt,claude.
+mediapipe-AI tool-live video -detects our hand gesture and extracts 21 hand landmarks.
+
+
+things to change:
+ui colour-navy blue
+mind map-both
+extra pg
+
+
+
+
+
+
+
+
+
+
+
+

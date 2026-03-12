@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign2Connect</title>
+    <link rel="stylesheet" href="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/style.css">
+</head>
+
+<body class="reg">
+    <!-- menu bar/navigation bar -->
+    <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container-fluid px-4" style="background: linear-gradient(180deg, #7af6ee, #eafffe);padding: 20px;">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="#">Sign2Speak</a>
+
+            <!-- Mobile toggle -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#mobileMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="collapse navbar-collapse d-none d-lg-flex">
+
+                <!-- Center menu -->
+                <ul class="navbar-nav mx-auto gap-4">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
+                </ul>
+
+                <!-- Right buttons -->
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-sm"
+                        style="font-size: 20px;">Register</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-sm"
+                        style="font-size: 20px;">Login</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header">
+            <h6 class="offcanvas-title">Menu</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body" style="background: linear-gradient(180deg, #7af6ee, #eafffe);">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
+                <hr>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoiceW: Beyond Sound</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(to bottom,#0a192f,#000);
+  color:white;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:30px;
+}
+
+h1,h2{
+  text-align:center;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(60px,1fr));
+  gap:10px;
+  margin-top:20px;
+}
+
+.letter-card{
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:20px;
+  border-radius:16px;
+  cursor:pointer;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,255,0.2);
+  transition:0.3s;
+}
+
+.letter-card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 15px #00f0ff;
+}
+
+.letter-card.active{
+  box-shadow:0 0 20px #9f7aea;
+}
+
+.avatar-panel{
+  margin-top:30px;
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,255,0.2);
+  text-align:center;
+}
+
+.avatar-panel img{
+  width:200px;
+  height:auto;
+}
+
+.controls{
+  margin-top:15px;
+}
+
+button{
+  background:transparent;
+  border:1px solid #00f0ff;
+  color:#00f0ff;
+  padding:8px 14px;
+  margin:5px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#00f0ff;
+  color:black;
+}
+
+.quiz-section{
+  margin-top:40px;
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(155,100,255,0.3);
+  text-align:center;
+}
+
+.quiz-options{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:15px;
+}
+
+.quiz-btn{
+  font-size:22px;
+  padding:15px;
+  border-radius:15px;
+  border:1px solid #aaa;
+  cursor:pointer;
+  background:rgba(255,255,255,0.05);
+}
+
+.correct{
+  background:#00ff88;
+  color:black;
+}
+
+.incorrect{
+  background:#ff4444;
+  color:white;
+}
+
+.toggle{
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>VoiceW: Beyond Sound</h1>
+<h2>Learn Sign Language – English Alphabet (A–Z)</h2>
+<p style="text-align:center;">Click any letter to view its sign animation.</p>
+
+<div class="grid" id="alphabetGrid"></div>
+
+<div class="avatar-panel">
+  <h3>Showing Sign for: <span id="selectedLetter">A</span></h3>
+  <img src="avatar-placeholder.png" id="avatarImg">
+  <p id="description"></p>
+
+  <div class="controls">
+    <button onclick="replay()">🔁 Replay</button>
+    <button onclick="toggleAvatar()">👤 Toggle Avatar</button>
+  </div>
+</div>
+
+<div class="quiz-section">
+  <h3>Practice Mode</h3>
+  <button onclick="toggleQuiz()">🎯 Enable Quiz</button>
+
+  <div id="quizArea" style="display:none;">
+    <p>Which letter is the avatar signing?</p>
+    <div class="quiz-options" id="quizOptions"></div>
+    <p id="quizResult"></p>
+  </div>
+</div>
+
+</div>
+
+<script>
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+const SIGN_DESCRIPTIONS = {
+A:"Make a fist with thumb to the side.",
+B:"Four fingers up, thumb across palm.",
+C:"Curve hand into a C shape.",
+D:"Index up, other fingers touch thumb.",
+E:"Curl fingers to touch thumb.",
+F:"Index and thumb circle, others up.",
+G:"Point sideways with thumb out.",
+H:"Index and middle sideways.",
+I:"Raise pinky only.",
+J:"Draw J with pinky.",
+K:"V shape with thumb between.",
+L:"Form L with thumb and index.",
+M:"Three fingers over thumb.",
+N:"Two fingers over thumb.",
+O:"All fingers form O.",
+P:"Index downward with middle extended.",
+Q:"Index and thumb downward.",
+R:"Cross index and middle.",
+S:"Fist with thumb over fingers.",
+T:"Thumb between index and middle.",
+U:"Index and middle together.",
+V:"Index and middle V shape.",
+W:"Three fingers spread.",
+X:"Hook index finger.",
+Y:"Thumb and pinky out.",
+Z:"Draw Z in air."
+};
+
+const grid = document.getElementById("alphabetGrid");
+const selectedLetterEl = document.getElementById("selectedLetter");
+const descriptionEl = document.getElementById("description");
+
+let selectedLetter = "A";
+let avatarType = "male";
+let quizMode = false;
+let quizLetter = "";
+
+function renderAlphabet(){
+  ALPHABET.forEach(letter=>{
+    const btn=document.createElement("div");
+    btn.className="letter-card";
+    btn.innerText=letter;
+    btn.onclick=()=>selectLetter(letter,btn);
+    grid.appendChild(btn);
+  });
+}
+
+function selectLetter(letter,element){
+  selectedLetter=letter;
+  selectedLetterEl.innerText=letter;
+  descriptionEl.innerText=SIGN_DESCRIPTIONS[letter];
+  document.querySelectorAll(".letter-card").forEach(el=>el.classList.remove("active"));
+  element.classList.add("active");
+}
+
+function replay(){
+  alert("Replay animation for "+selectedLetter);
+}
+
+function toggleAvatar(){
+  avatarType = avatarType==="male"?"female":"male";
+  document.getElementById("avatarImg").style.filter=
+    avatarType==="female"?"hue-rotate(40deg)":"none";
+}
+
+function toggleQuiz(){
+  quizMode=!quizMode;
+  document.getElementById("quizArea").style.display=
+    quizMode?"block":"none";
+  if(quizMode) nextQuiz();
+}
+
+function nextQuiz(){
+  quizLetter = ALPHABET[Math.floor(Math.random()*26)];
+  const options = new Set([quizLetter]);
+  while(options.size<4){
+    options.add(ALPHABET[Math.floor(Math.random()*26)]);
+  }
+  const optArray = Array.from(options);
+  const container=document.getElementById("quizOptions");
+  container.innerHTML="";
+  optArray.forEach(opt=>{
+    const btn=document.createElement("div");
+    btn.className="quiz-btn";
+    btn.innerText=opt;
+    btn.onclick=()=>checkAnswer(opt,btn);
+    container.appendChild(btn);
+  });
+  document.getElementById("quizResult").innerText="";
+}
+
+function checkAnswer(opt,btn){
+  if(opt===quizLetter){
+    btn.classList.add("correct");
+    document.getElementById("quizResult").innerText="Correct!";
+    setTimeout(nextQuiz,1500);
+  }else{
+    btn.classList.add("incorrect");
+    document.getElementById("quizResult").innerText="Wrong! Correct: "+quizLetter;
+  }
+}
+
+renderAlphabet();
+selectLetter("A",document.querySelector(".letter-card"));
+</script>
+
+</body>
+</html>
+
+    <script src="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

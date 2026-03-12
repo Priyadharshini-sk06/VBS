@@ -1,0 +1,263 @@
+paper presentation
+prompt
+
+
+Project Title: Sign2Connect
+Theme: Futuristic accessibility platform with dark gradient background (dark blue → black), glassmorphism cards, and neon-blue interactive glow.
+Font: Modern sans-serif (e.g., Poppins / Inter).
+Primary Accent: Neon blue and light purple.
+Overall Style: Clean, symmetric layout, rounded corners (2xl), glowing buttons, real-time data panels.
+
+🔹 Page 1 — Landing Page
+
+Background: gradient dark blue → black.
+
+Centered logo + title “Sign2Connect” in bold, futuristic font.
+
+Tagline: “Empowering inclusive two-way communication.”
+
+Below tagline:
+
+Login and Sign Up buttons (rounded, glowing neon blue).
+
+Small text: “Already registered? Click Login.”
+
+Bottom-right: accessibility icons → 🅰️ (text size), 🎨 (contrast toggle), and “CC” (subtitles).
+
+Top-right: help “?” icon opens modal with short how-it-works explanation.
+
+Minimalist glow animation on hover.
+
+🔹 Page 2 — Communication Mode Selection
+
+Title: “Choose Your Communication Mode.”
+
+Two large glassmorphism cards centered:
+
+Sign → Speak — Hand ✋ + Voice 🎤 icons; text “For Deaf/Mute presenters to speak using signs.”
+
+Speak → Sign — Voice 🎤 + Avatar 👤 icons; text “For audiences/teachers to communicate through signs.”
+Each has a glowing “Select” button.
+
+Below cards: extra inline question:
+
+“Where will you use Sign2Connect?”
+• Presentation (Projector/In-Person)
+• Online Meeting (Virtual Group)
+• Practice (Personal Mode)
+
+Small help tooltip on top-right explaining differences.
+Proceed button centered below.
+
+🔹 Page 3A — Input Setup (Sign → Speak)
+
+Center glassmorphism form card.
+
+Fields:
+
+Name (text input)
+
+Role (Presenter/Participant)
+
+Gender (Male/Female/Neutral) → defines TTS voice
+
+Input Sign Language (dropdown: ASL, ISL, BSL, RSL, CSL, DSL)
+
+Output Spoken Language (dropdown: English, Tamil, Chinese, Marathi, Hindi, Spanish)
+
+Usage Environment (Presentation / Online Meeting / Practice)
+
+Accessibility settings: captions toggle, text size, contrast, dyslexia font, slow sign playback.
+
+Bottom: glowing Proceed button.
+Top-right: accessibility toggle icons.
+
+🔹 Page 3B — Input Setup (Speak → Sign)
+
+Similar layout.
+
+Fields:
+
+Name (text input)
+
+Role (Host/Participant)
+
+Gender → decides avatar gender
+
+Spoken Language (6 options)
+
+Conveying Sign Language (6 options)
+
+Usage Environment (Presentation / Online Meeting / Practice)
+
+Accessibility settings: captions toggle, text size, contrast, dyslexia font.
+
+Optional toggle: “Use 3D Avatar” or “Use GIF Signs.”
+
+Bottom: glowing Proceed button.
+Top-right: accessibility icons.
+
+🔹 Page 4A — Main Presentation (Sign → Speak)
+
+Split screen layout (50/50):
+
+Left Half — Presentation Controls:
+
+Upload PPT or Import from Drive.
+
+Slide thumbnails and preview.
+
+Navigation buttons (Prev / Next / Jump).
+
+“Share to Projector” (fullscreen clean view).
+
+Record Session toggle with indicator.
+
+Right Half — Live Translation & Output:
+
+Top 60%:
+
+Real-time detected text output (scrolling).
+
+Play 🔊 for TTS voice.
+
+Live output language switch dropdown.
+
+“Virtual Microphone” toggle to send TTS as system audio.
+
+Bottom 40%:
+
+Webcam feed with live hand-sign tracking overlay.
+
+Optional 3D avatar mirroring detected signs.
+
+Manual correction box (tap to edit detected text).
+
+“Send to Meeting Chat” button (if in online mode).
+
+Additional Options:
+
+Pause/Resume recognition.
+
+Recording saves slides + webcam + transcript + TTS + avatar animation.
+
+Mobile Sync toggle: generate QR code for audience to view captions + sign clips on phones.
+
+🔹 Page 4B — Main Presentation (Speak → Sign)
+
+Split screen layout (50/50):
+
+Left Half — Input & Slides:
+
+🎤 Start/Stop microphone capture.
+
+Real-time transcript with edit option.
+
+PPT sharing area (upload or share).
+
+Record session toggle.
+
+Right Half — Output Display:
+
+Top 60%: recognized speech text + live language translation + output language dropdown.
+
+Bottom 40%: 3D avatar (male/female based on setup) performing sign animations.
+
+Fallback finger-spelling animation for unknown words.
+
+Dropdown to switch avatar style or conveying sign language.
+
+“Send to Mobile” button to stream avatar animation to companion app.
+
+Advanced Controls:
+
+Phrase mapping editor (custom sign definitions).
+
+Emotion detection badge (tone from voice).
+
+Live translation chain: Speech → Text → Target Sign Language.
+
+Recording:
+Stores transcript + avatar animation + PPT timeline synced to speech.
+
+🔹 Page 5 — Q&A / Integrated Meeting Mode
+
+Activated after presentation or inside online meeting.
+
+Same layout with additional docked Q&A panel.
+
+Q&A Panel (bottom or right side):
+
+Chat feed showing:
+
+Audience question (STT → text + avatar sign).
+
+Presenter response (Sign → text + TTS).
+
+Real-time bidirectional translation for both parties.
+
+Raise Hand system + name labels.
+
+Host quick actions: “Mute All,” “Spotlight Speaker,” “Allow Sign Input.”
+
+If Online Meeting:
+
+Built-in Sign2Connect Meet platform using WebRTC.
+
+Host creates shareable link; others join via link/code.
+
+Participants choose their mode (Sign→Speak / Speak→Sign / Both).
+
+Host role assignment, lobby control, recording consent prompt.
+
+Each user’s screen displays transcript + TTS/Avatar outputs in sync.
+
+🔹 Shared Features Across All Pages
+
+Recording & Replay:
+
+Records webcam, mic, slides, text, audio, and sign animation with timestamps.
+
+Export formats: MP4, MP3, SRT, JSON.
+
+Stored securely with consent.
+
+Live Language Switching:
+
+Dropdown in transcript or TTS panel to change output language anytime.
+
+Instant re-synthesis for next lines; optional re-render last few lines.
+
+Accessibility Settings (global):
+
+Text size, contrast, dyslexia font, captions/subtitles toggle, slow sign playback, vibration alerts (for mobile).
+
+Multi-Device Sync:
+
+Companion mobile app/web client connects via QR or code.
+
+Displays live captions, sign clips, or TTS.
+
+Presenter can use mobile as remote to change slides.
+
+Performance Hints:
+
+Latency target under 1.2 s; fallback to low-bandwidth text mode.
+
+If confidence low → highlight uncertain word for manual correction.
+
+Everything encrypted end-to-end.
+
+🔹 UI Aesthetic Guidance
+
+Rounded 2xl edges, glass blur backgrounds (20–30 px), soft shadows.
+
+Use glowing blue borders for buttons and active panels.
+
+Animations: smooth fade/slide transitions between pages; minimal motion for accessibility.
+
+Typography hierarchy: large bold headers, medium labels, smaller assistive text.
+
+🔹 End Note for Designer
+
+Create 5 main pages and integrated panels exactly as above. Maintain visual continuity, neon-blue glow interactions, and dark gradient environment. Include real-time text feeds, avatar/video placeholders, and accessibility toggles on all screens. Simulate recording indicators, QR sync UI, and chat feed for Q&A.

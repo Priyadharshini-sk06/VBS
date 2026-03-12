@@ -31,19 +31,58 @@ a{
     width: 75%;
 }
 
+/* new changes */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+     background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,255,255,0.55),
+            rgba(255,255,255,0.25) 30%,
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            #F0EAF8 0%,
+            #E9E2F6 40%,
+            #DCD2F0 75%,
+            #CFC4EA 100%
+        );  
+    
+    
+}
+
+#home {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main {
+    flex: 1;
+}
+/* add main before every section */
+/* new changes */
+
+
+
 
 /* home */
 .intropg{
     text-align: center;
     margin-top: 50px;
-    margin-bottom: 110px;
+    /* margin-bottom: 110px; */
     padding-top: 50px;
 }
 .action-btn {
     display: inline-block;             
     padding: 10px;
     border-radius: 5px;
-    background: linear-gradient(180deg, #7af6ee, #eafffe);
+    /* background: linear-gradient(180deg, #7af6ee, #eafffe); */
+    background: linear-gradient(135deg, #BFA8E8 0%, #9D7FE3 100%);
     cursor: pointer;
     transition: all 0.3s ease;
     margin: 0 10px 20px;
@@ -103,7 +142,7 @@ a{
 
 .card {
     
-    background: linear-gradient(180deg, #7af6ee, #eafffe);
+    /* background: linear-gradient(180deg, #7af6ee, #eafffe); */
     border: none;
     border-radius: 16px;
     transition: all 0.35s ease;
@@ -136,15 +175,28 @@ a{
     margin-top: 30px;
     }
 .custom-btn{
-    color:black;
-    background: white;
+    color:white;
+    background: linear-gradient(135deg, #BFA8E8, #9D7FE3);
     margin-bottom: 30px;
     margin-top: 30px;
     border: none;
     
 }
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #BFA8E8;
+    padding: 10px;
+}
+
+.form-control:focus {
+    border-color: #9D7FE3;
+    box-shadow: 0 0 6px rgba(157,127,227,0.5);
+}
 .custom-btn:hover {
-    background: linear-gradient(180deg, #7af6ee, #eafffe);
+    background: linear-gradient(180deg, #E9E2F6, #CFC4EA);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+
 }
 
 .contact-form-heading h2{
@@ -181,7 +233,8 @@ a{
 
 .form-box {
     max-width: 440px;
-    background: linear-gradient(180deg, #7af6ee, #eafffe);
+    background: linear-gradient(180deg, #E9E2F6, #CFC4EA);
+    backdrop-filter: blur(6px);
     padding: 40px 35px;
     border-radius: 20px;
     margin: 60px auto;
@@ -189,6 +242,7 @@ a{
     position: relative;
     z-index: 5;
 }
+    
 .back-text {
     font-size: 15px;
     margin-bottom: 20px;

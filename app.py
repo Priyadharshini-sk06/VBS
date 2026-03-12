@@ -25,7 +25,10 @@ def connectwithus():
         # you can store data later
         return redirect(url_for("home"))
     return render_template("connectwithus.html")
-
+    
+@app.route("/signquest")
+def signquest():
+    return render_template("signlearn.html")
 # ======================
 # AUTH
 # ======================

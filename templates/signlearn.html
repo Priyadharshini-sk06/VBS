@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Beyond Sound</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+color:#2C3E50;
+}
+
+.header{
+text-align:center;
+padding:40px 20px 20px;
+}
+
+.header h1{
+font-weight:700;
+margin-bottom:5px;
+}
+
+.header p{
+color:#6B8A9C;
+font-size:14px;
+}
+
+.grid{
+max-width:900px;
+margin:20px auto;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(55px,1fr));
+gap:12px;
+padding:0 20px;
+}
+
+.letter{
+height:55px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+border:1px solid #CFC4EA;
+cursor:pointer;
+transition:all 0.3s ease;
+font-weight:600;
+background:white;
+}
+
+.letter:hover{
+box-shadow:
+0 0 12px rgba(157,127,227,0.8),
+0 0 25px rgba(157,127,227,0.6),
+0 0 40px rgba(157,127,227,0.4),
+inset 0 0 8px rgba(255,255,255,0.6);
+}
+
+.letter.active{
+box-shadow:
+0 0 12px rgba(157,127,227,0.8),
+0 0 25px rgba(157,127,227,0.6),
+0 0 40px rgba(157,127,227,0.4),
+inset 0 0 8px rgba(255,255,255,0.6);
+}
+
+.panel{
+max-width:950px;
+margin:30px auto;
+padding:25px;
+border-radius:18px;
+background:white;
+border:1px solid #D9F3F5;
+text-align:center;
+box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* .panel img{
+width:300px;
+margin:15px 0;
+border-radius:5px;
+} */
+.panel img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  margin: 15px 0;
+  border-radius: 5px;
+}
+
+.sign-quiz{
+border-radius:20px;
+box-shadow:0 6px 25px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+#signAvatar{
+border-radius:15px;
+background:#F4FBFD;
+padding:15px;
+border:1px solid #D9F3F5;
+display:block;
+margin:20px auto;
+}
+
+#signOptions .card{
+border-radius:12px;
+border:1px solid #CFEFF2;
+transition:0.3s ease;
+background:#F9FEFF;
+font-weight:500;
+}
+
+#signOptions .card:hover{
+background:#7EDFD8;
+color:white;
+transform:translateY(-3px);
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+#signResult{
+font-size:18px;
+margin-top:15px;
+font-weight:bold;
+}
+</style>
+
+<body>
+
+<nav class="navbar navbar-expand-lg"
+style="background: linear-gradient(90deg,#F0EAF8 0%,#C3B8E6 100%);padding:20px;">
+<div class="container-fluid px-4">
+
+<a class="navbar-brand fw-bold" href="#">Voice Beyond Sound</a>
+
+<div class="collapse navbar-collapse d-none d-lg-flex">
+
+<ul class="navbar-nav mx-auto gap-4">
+<li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ url_for('signquest') }}">SignQuest</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
+</ul>
+
+</div>
+</div>
+</nav>
+
+<div class="header">
+<h1>Voice Beyond Sound</h1>
+<h3>Learn Sign Language - English Alphabet (A-Z)</h3>
+<p>Click any letter to view its sign animation.</p>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="panel">
+
+<h3>Showing Sign for: <span id="selected">A</span></h3>
+
+<img src="{{ url_for('static', filename='IMAGES/A.jpeg') }}">
+<p id="desc"></p>
+
+</div>
+
+<div class="sign-quiz p-4 mt-5 text-center">
+
+<h3>Practice Mode</h3>
+<p>Which letter is the avatar signing?</p>
+
+<img id="signAvatar" src="../static/IMAGES/A.jpeg" style="width:200px;">
+
+<div class="row g-3" id="signOptions"></div>
+
+<p id="signResult"></p>
+
+</div>
+
+<script>
+
+const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const grid=document.getElementById("grid");
+const desc=document.getElementById("desc");
+const selected=document.getElementById("selected");
+const avatar=document.getElementById("avatar");
+
+const descriptions={
+A:"Make a fist with thumb to side.",
+B:"Four fingers up, thumb across palm.",
+C:"Curve hand into C shape.",
+D:"Index up, others touch thumb.",
+E:"Curl fingers touching thumb.",
+F:"Index and thumb circle.",
+G:"Point sideways.",
+H:"Two fingers sideways.",
+I:"Raise pinky.",
+J:"Draw J in air.",
+K:"V shape with thumb.",
+L:"Form L.",
+M:"Three fingers over thumb.",
+N:"Two fingers over thumb.",
+O:"Form O.",
+P:"Point downward.",
+Q:"Index and thumb down.",
+R:"Cross index and middle.",
+S:"Fist thumb over fingers.",
+T:"Thumb between fingers.",
+U:"Index and middle together.",
+V:"Victory shape.",
+W:"Three fingers up.",
+X:"Hook index.",
+Y:"Thumb and pinky out.",
+Z:"Draw Z."
+};
+
+/* ALPHABET GRID */
+
+letters.forEach(letter=>{
+
+const div=document.createElement("div");
+div.className="letter";
+div.innerText=letter;
+
+div.onclick=function(){
+
+document.querySelectorAll(".letter").forEach(el=>el.classList.remove("active"));
+div.classList.add("active");
+
+selected.innerText=letter;
+desc.innerText=descriptions[letter];
+
+/* IMAGE CHANGE */
+
+let formats = [".jpeg",".jpg",".png"];
+let index = 0;
+
+function loadImage(){
+avatar.src = "/static/IMAGES/" + letter + formats[index];
+}
+
+avatar.onerror = function(){
+index++;
+if(index < formats.length){
+loadImage();
+}
+};
+
+loadImage();
+
+};
+
+grid.appendChild(div);
+
+});
+
+/* QUIZ QUESTIONS */
+
+var signQuestions=[
+{letter:"A",correct:"A",options:["A","G","F","C"]},
+{letter:"B",correct:"B",options:["D","B","E","H"]},
+{letter:"C",correct:"C",options:["C","X","Y","T"]},
+{letter:"D",correct:"D",options:["D","P","K","R"]},
+{letter:"E",correct:"E",options:["L","E","M","O"]}
+];
+function shuffleQuestions(array){
+for(let i=array.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[array[i],array[j]]=[array[j],array[i]];
+}
+}
+
+var currentSign=0;
+var signScore=0;
+
+function loadSignQuestion(){
+
+var q=signQuestions[currentSign];
+
+/* QUIZ IMAGE */
+
+var quizImg=document.getElementById("signAvatar");
+
+quizImg.src="../static/IMAGES/"+q.letter+".jpeg";
+
+quizImg.onerror=function(){
+quizImg.src="../static/IMAGES/"+q.letter+".png";
+};
+
+var optionsDiv=document.getElementById("signOptions");
+optionsDiv.innerHTML="";
+
+for(var i=0;i<q.options.length;i++){
+
+var col=document.createElement("div");
+col.className="col-6";
+
+var btn=document.createElement("div");
+btn.className="card p-3 text-center";
+btn.style.cursor="pointer";
+btn.innerText=q.options[i];
+
+btn.onclick=function(){
+checkSignAnswer(this.innerText);
+};
+
+col.appendChild(btn);
+optionsDiv.appendChild(col);
+
+}
+
+}
+
+function checkSignAnswer(selected){
+
+var correct=signQuestions[currentSign].correct;
+
+if(selected===correct){
+
+signScore++;
+document.getElementById("signResult").innerText="Correct! ✅";
+
+}else{
+
+document.getElementById("signResult").innerText="Wrong! Correct answer: "+correct;
+
+}
+
+setTimeout(function(){
+
+currentSign++;
+
+if(currentSign<signQuestions.length){
+
+document.getElementById("signResult").innerText="";
+loadSignQuestion();
+
+}else{
+
+document.querySelector(".sign-quiz").innerHTML=
+"<h2>Your Score: "+signScore+" / "+signQuestions.length+"</h2>";
+
+}
+
+},1000);
+
+}
+
+
+shuffleQuestions(signQuestions);
+loadSignQuestion();
+
+</script>
+
+<section class="footer" style="background:linear-gradient(90deg,#F0EAF8 0%,#C3B8E6 100%);text-align:center;">
+<div class="container">
+<footer style="padding:20px;">
+<h6>Bridging communication between sign language and speech</h6>
+<a href="{{ url_for('connectwithus') }}" style="text-decoration:none;color:black;">Reach us</a>
+<hr>
+<p>© 2025 Voice Beyond Sound | Built for Inclusive Communication.</p>
+</footer>
+</div>
+</section>
+<script src="{{ url_for('static', filename='BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

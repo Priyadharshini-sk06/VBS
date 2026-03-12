@@ -1,0 +1,124 @@
+Sign2Connect (Root)
+│
+├── Page 1: Landing Page
+│     ├── Logo + Project Title
+│     ├── Tagline (Accessibility for All)
+│     ├── Button: Login
+│     ├── Button: Sign Up
+│     └── Note: “Already registered? Click Login”
+│
+├── Page 2: Authentication
+│     ├── Login
+│     │     ├── Email
+│     │     ├── Password
+│     │     ├── Login Button
+│     │     └── Link → Signup
+│     │
+│     └── Signup
+│           ├── Name
+│           ├── Email
+│           ├── Password
+│           ├── Confirm Password
+│           └── Register Button
+│
+├── Page 3: Choose Communication Mode
+│     ├── Card 1: Sign → Speak
+│     │     └── Description: Deaf/Hard-of-Hearing Presenter
+│     │
+│     └── Card 2: Speak → Sign
+│           └── Description: Hearing Presenter → Sign Output
+│
+├── Page 4: User Details + Interaction Type
+│     ├── Section A: Sign → Speak Mode
+│     │     ├── Name
+│     │     ├── Gender (for TTS Voice)
+│     │     ├── Input Sign Language (ASL)
+│     │     └── Output Speech Language
+│     │
+│     ├── Section B: Speak → Sign Mode
+│     │     ├── Name
+│     │     ├── Gender (3D Avatar Type)
+│     │     ├── Input Spoken Language
+│     │     └── Output Sign Language (ASL)
+│     │
+│     └── Section C: Choose Interaction Type
+│           ├── Option 1: One-to-One Mode
+│           │     └── Button: Proceed → Page 5
+│           │
+│           └── Option 2: Online Meeting Mode
+│                 ├── Create Meeting
+│                 │     ├── Generated Meeting ID
+│                 │     ├── Shareable Meeting Link
+│                 │     ├── Button: Copy Link
+│                 │     └── Button: Start Meeting
+│                 │
+│                 └── Join Meeting
+│                       ├── Meeting ID Input
+│                       ├── Username Input
+│                       └── Join Button
+│
+├── Page 5: Main Presentation Interface
+│     ├── Common Layout
+│     │     ├── Left Panel: PPT Upload + Slide Controls
+│     │     ├── Right Top Panel: Live Text / Transcript
+│     │     └── Right Bottom Panel: Webcam or 3D Avatar
+│     │
+│     ├── Case A: Sign → Speak
+│     │     ├── Presenter Webcam (ASL Detection)
+│     │     ├── Detected Text Output
+│     │     └── Text-to-Speech Audio Output
+│     │
+│     ├── Case B: Speak → Sign
+│     │     ├── Microphone Input
+│     │     ├── Speech-to-Text Output
+│     │     ├── 3D Sign Avatar
+│     │     └── Fallback: Fingerspelling
+│     │
+│     └── Online Meeting Add-ons
+│           ├── Participant List
+│           ├── Live Captions Panel
+│           ├── Audio / Video Streaming
+│           └── Sign / Avatar Output Visible to All
+│
+├── Page 6: Q&A Session (Post Presentation)
+│     ├── Left Panel: Q&A Chat Box
+│     │     ├── Audience Question (Voice → Text)
+│     │     ├── Username + Timestamp
+│     │     ├── Question Queue
+│     │     └── Highlight Current Question
+│     │
+│     ├── Right Panel: Presenter Response Area
+│     │     ├── Live Webcam (Sign Language)
+│     │     ├── Detected Text Output
+│     │     └── Speech Output (TTS)
+│     │
+│     └── Bottom Control Bar
+│           ├── Button: Next Question
+│           ├── Button: Repeat Question
+│           ├── Button: End Q&A
+│           └── Button: Download Full Transcript
+│
+├── Page 7: Extensions / Future Enhancements
+│     ├── Multi-user Signing Support
+│     ├── Session Recording (Video + Transcript)
+│     ├── Personalized 3D Avatars
+│     ├── Expanded ASL Vocabulary
+│     ├── Accessibility Controls
+│     ├── Auto Language Translation
+│     └── AI-based Feedback & Analytics
+│
+└── Page 8: End / Logout
+      ├── Session Complete Message
+      ├── Download Transcript
+      ├── Save Session Report (PDF)
+      └── Logout Button
+
+
+
+
+Sign2Connect is designed as an inclusive presentation platform, not just a sign translator. It enables presenters and audiences to interact seamlessly using sign and speech with live transcripts, slides, and accessibility-focused design.
+
+The Q&A module is activated only after the presentation.
+Audience members interact using voice, converted to text.
+The sign presenter responds using sign language, which is converted back to speech.
+This design avoids confusion and mirrors real-world conference interaction.

@@ -1,43 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sign2connect</title>
-    <link rel="stylesheet" href="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/CSS/style.css">
-</head>
-<body>
-    <div class="navigation-bar">
-        <nav class="navbar navbar-expand-lg navbar-dark ">
-            <div class="container" style="background-color: skyblue;">
 
-                <a class="navbar-brand" href="index.html">Sign2Connect</a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link " href="#home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link " href="#guide">User Guide</a></li>
-                        <li class="nav-item"><a class="nav-link " href="#bus">Login</a></li>
-                        <li class="nav-item"><a class="nav-link " href="#pooja">Register</a></li>
-                     
-
-                    </ul>
-
-
-                </div>
-            </div>
-        </nav>
-    </div> -->
-
-<!-- <script src="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,11 +11,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
 </head>
 
-<body style=" background: linear-gradient(180deg, #ffffff, #f4ffff); ">
+<body>
 
     <!-- menu bar/navigation bar -->
-    <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container-fluid px-4" style="background: linear-gradient(180deg, #7af6ee, #eafffe);padding: 20px;">
+    <nav class="navbar navbar-expand-lg " style="background: linear-gradient(90deg, #F0EAF8 0%, #C3B8E6 100%),radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 2px, transparent 3px),radial-gradient(circle at 70% 60%, rgba(255,255,255,0.5) 2px, transparent 3px),radial-gradient(circle at 40% 80%, rgba(255,255,255,0.4) 2px, transparent 3px);background-blend-mode: overlay;padding: 20px; ">
+        <!-- <div class="container-fluid px-4" style="background: linear-gradient(180deg, #7af6ee, #eafffe);padding: 20px;"> -->
+            <div class="container-fluid px-4" >
 
             <!-- Logo -->
             <a class="navbar-brand fw-bold" href="#">Voice Beyond Sound</a>
@@ -72,6 +34,7 @@
                 <ul class="navbar-nav mx-auto gap-4">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('signquest') }}">SignQuest</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
                 </ul>
 
@@ -128,7 +91,7 @@
     </section> -->
 
     <!-- footer -->
-    <section class="footer" style="background: linear-gradient(180deg, #7af6ee, #eafffe);text-align:center;">
+    <section class="footer" style=" background: linear-gradient(90deg, #F0EAF8 0%, #C3B8E6 100%),radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 2px, transparent 3px),radial-gradient(circle at 70% 60%, rgba(255,255,255,0.5) 2px, transparent 3px),radial-gradient(circle at 40% 80%, rgba(255,255,255,0.4) 2px, transparent 3px);background-blend-mode: overlay;text-align:center;">
         <div class="container">
             <footer style="padding: 20px;;">
                 <h6 style="text-align: center;">Bridging communication between sign language and speech</h6>

@@ -1,0 +1,44 @@
+
+CREATE DATABASE sign2speak,
+
+
+CREATE USER 'sign2speak'@'localhost' IDENTIFIED BY 'sign2speak';
+
+
+GRANT ALL PRIVILEGES ON sign2speak.* TO 'sign2speak'@'localhost';
+
+FLUSH PRIVILEGES;
+
+SHOW GRANTS FOR 'sign2speak'@'localhost' ;
+
+exit
+
+
+CREATE TABLE sign2speak.User_Details (
+    user_Id INT AUTO_INCREMENT PRIMARY KEY,
+    user_Name VARCHAR(50),
+    phoneNum VARCHAR(15),
+    email VARCHAR(100),
+    password VARCHAR(100)
+);
+
+
+
+CREATE table sign2speak.contact_us (
+	con_name varchar(50),
+	con_no varchar(15),
+	con_email varchar(100),
+	con_query text,
+	con_feedback text 
+);
+
+
+
+
+
+
+
+
+
+
+

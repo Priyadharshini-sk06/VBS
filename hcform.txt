@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign2Connect</title>
+    <link rel="stylesheet" href="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/style.css">
+</head>
+
+<body class="reg">
+    <!-- menu bar/navigation bar -->
+    <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container-fluid px-4" style="background: linear-gradient(180deg, #7af6ee, #eafffe);padding: 20px;">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="#">Sign2Speak</a>
+
+            <!-- Mobile toggle -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#mobileMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="collapse navbar-collapse d-none d-lg-flex">
+
+                <!-- Center menu -->
+                <ul class="navbar-nav mx-auto gap-4">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
+                </ul>
+
+                <!-- Right buttons -->
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-sm"
+                        style="font-size: 20px;">Register</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-sm"
+                        style="font-size: 20px;">Login</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header">
+            <h6 class="offcanvas-title">Menu</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body" style="background: linear-gradient(180deg, #7af6ee, #eafffe);">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('userguide') }}">User Guide</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('connectwithus') }}">Help</a></li>
+                <hr>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="register">
+        <div class="form-box container">
+            <a href="{{ url_for('home') }}" class="back-text" style="text-decoration: none;">← Back to Home</a>
+            <h3 class="text-center mb-1"></h3>
+            
+            <form >
+
+                <!-- Name -->
+                <label>Name</label>
+                <div class="input-group mb-3">
+
+                    <input type="text" class="form-control" placeholder="Enter your Name" required name="">
+                </div>
+
+                
+                <!-- gender -->
+                <label class="form-label">Gender </label>
+                <div class="mb-3">
+
+
+                    <select class="form-select">
+                        <option selected disabled>Select gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Neutral</option>
+                    </select>
+                </div>
+                <!-- sign lang -->
+                <label class="form-label">Input Sign Language</label>
+                <div class="mb-3">
+
+                    <select class="form-select">
+                        <option selected disabled>Select sign language</option>
+                        <option>Indian Sign Language (ISL)</option>
+                        <option>American Sign Language (ASL)</option>
+                        <option>British Sign Language (BSL)</option>
+                    </select>
+                </div>
+
+                <!-- outspoken lang -->
+                <label class="form-label">Output Spoken Language</label>
+                <div class="mb-3">
+                    
+                    <select class="form-select">
+                        <option selected disabled>Select spoken language</option>
+                        <option>English</option>
+                        <option>Tamil</option>
+                        <option>Hindi</option>
+                        
+                    </select>
+                </div>
+
+
+
+
+
+                <button class="btn custom-btn w-100">Submit</button>
+            </form>
+        </div>
+    </section>
+    <!-- footer -->
+    <section class="footer" style="background: linear-gradient(180deg, #7af6ee, #eafffe);text-align:center;">
+        <div class="container">
+            <footer style="padding: 20px;">
+                <h6 style="text-align: center;">Bridging communication between sign language and speech</h6>
+                <a href="{{ url_for('connectwithus') }}" style="text-decoration: none;color: black;"
+                    class="reachus">Reach us</a>
+                <hr>
+                <p style="text-align: center;">© 2025 Sign2Speak | Built for Inclusive Communication.</p>
+
+
+            </footer>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+    <script src="../static/BOOTSTRAP/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
