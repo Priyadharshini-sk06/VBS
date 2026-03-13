@@ -62,19 +62,17 @@ startBtn.onclick = () => {
   recognition.continuous = true;
   recognition.interimResults = true;
 
-  recognition.onresult = (event) => {
-    let finalText = "";
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      if (event.results[i].isFinal) {
-        finalText += event.results[i][0].transcript;
-      }
-    }
+  recognition.onresult = async function(event){
 
-    if (finalText.trim() !== "") {
-      transcriptText.innerText = finalText;
-      processSpeech(finalText);
-    }
-  };
+  let speech = event.results[0][0].transcript;
+
+  document.getElementById("transcriptText").innerText = speech;
+
+  let english = await translateToEnglish(speech);
+
+  showSign(english);
+
+  }
 
   recognition.start();
   isListening = true;
@@ -99,6 +97,15 @@ const WORD_SIGNS = {
   "speech": "SPEECH",
   "sign": "SIGN"
 };
+
+async function translateToEnglish(text){
+
+const res = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q="+encodeURIComponent(text));
+
+const data = await res.json();
+
+return data[0][0][0];
+}
 
 function processSpeech(text) {
   const clean = text.toLowerCase().replace(/[^a-z\s]/g, "");
@@ -164,4 +171,30 @@ function processSpeech(text) {
           delay += 800;
       });
   }
+}
+
+function showSign(word){
+
+word = word.toUpperCase();
+
+let img = document.getElementById("signDisplay");
+
+let letters = word.split("");
+
+let i = 0;
+
+function play(){
+
+if(i >= letters.length) return;
+
+img.src = "/static/avatar/ASL/alphabet/" + letters[i] + ".gif";
+
+i++;
+
+setTimeout(play,1000);
+
+}
+
+play();
+
 }

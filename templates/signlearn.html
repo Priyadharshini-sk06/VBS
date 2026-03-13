@@ -163,8 +163,7 @@ style="background: linear-gradient(90deg,#F0EAF8 0%,#C3B8E6 100%);padding:20px;"
 <div class="panel">
 
 <h3>Showing Sign for: <span id="selected">A</span></h3>
-
-<img src="{{ url_for('static', filename='IMAGES/A.jpeg') }}">
+<img id="avatar" src="{{ url_for('static', filename='IMAGES/A.jpeg') }}">
 <p id="desc"></p>
 
 </div>
@@ -237,21 +236,25 @@ desc.innerText=descriptions[letter];
 
 /* IMAGE CHANGE */
 
-let formats = [".jpeg",".jpg",".png"];
-let index = 0;
+// let formats = [".jpeg",".jpg",".png"];
+// let index = 0;
 
-function loadImage(){
-avatar.src = "/static/IMAGES/" + letter + formats[index];
-}
+// function loadImage(){
+// avatar.src = "/static/IMAGES/" + letter + formats[index];
+// }
 
+// avatar.onerror = function(){
+// index++;
+// if(index < formats.length){
+// loadImage();
+// }
+// };
+avatar.src = "/static/IMAGES/" + letter + ".png";
 avatar.onerror = function(){
-index++;
-if(index < formats.length){
-loadImage();
-}
+    avatar.src = "/static/IMAGES/" + letter + ".jpeg";
 };
 
-loadImage();
+// loadImage();
 
 };
 

@@ -40,60 +40,65 @@
 
 <!-- logic -->
 <script>
-function nextQuestion() {
-  listenQuestion();
-  document.getElementById("answerText").innerHTML = "";
-}
-
-function repeatQuestion() {
-  const qBox = document.getElementById("questions");
-  if (!qBox.lastChild) return;
-
-  const qs = qBox.lastChild.innerText;
-  fetch("/tts", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({ text: qs })
+  fetch("/mode",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({mode:"QA"})
   });
-}
+  function nextQuestion() {
+    listenQuestion();
+    document.getElementById("answerText").innerHTML = "";
+  }
 
-function endQA() {
-  fetch("/mode", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({ mode: "SPELL" })
-  });
-  window.location.href = "/";
-}
+  function repeatQuestion() {
+    const qBox = document.getElementById("questions");
+    if (!qBox.lastChild) return;
+
+    const qs = qBox.lastChild.innerText;
+    fetch("/tts", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ text: qs })
+    });
+  }
+
+  function endQA() {
+    fetch("/mode", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ mode: "SPELL" })
+    });
+    window.location.href = "/";
+  }
 </script>
 
 <script>
-async function listenQuestion() {
-  const res = await fetch("http://localhost:5000/qa/listen", {
-    method: "POST"
+  async function listenQuestion() {
+    const res = await fetch("http://localhost:5000/qa/listen", {
+      method: "POST"
+    });
+    const data = await res.json();
+    document.getElementById("questions").innerHTML +=
+      `<p>${data.question}</p>`;
+  }
+
+  setInterval(listenQuestion, 6000);
+
+  fetch("/mode", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mode: "QA" })
   });
-  const data = await res.json();
-  document.getElementById("questions").innerHTML +=
-    `<p>${data.question}</p>`;
-}
 
-setInterval(listenQuestion, 6000);
+  const socket = io();
 
-fetch("/mode", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ mode: "QA" })
-});
+  socket.on("qa_answer", letter => {
+    document.getElementById("answerText").innerHTML += letter;
+  });
 
-const socket = io();
-
-socket.on("qa_answer", letter => {
-  document.getElementById("answerText").innerHTML += letter;
-});
-
-socket.on("qa_complete", answer => {
-  document.getElementById("answerText").innerHTML += "<br><b>Final:</b> " + answer + "<hr>";
-});
+  socket.on("qa_complete", answer => {
+    document.getElementById("answerText").innerHTML += "<br><b>Final:</b> " + answer + "<hr>";
+  });
 </script>
 </body>
 </html>

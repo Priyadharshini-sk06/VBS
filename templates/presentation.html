@@ -16,11 +16,10 @@
 
     <input type="file" id="ppt" accept=".pptx">
     <button onclick="uploadPPT()">Upload</button>
-
     <div id="ppt-text" style="margin-top:15px;color:white">
       Upload PPT to view slides
     </div>
-    <div id="pptslides"></div>
+    <div id="pptslides" style="height:350px; overflow:auto;"></div>
 
   </div>
 
@@ -42,7 +41,8 @@
 
       <!-- WEBCAM -->
       <div class="video">
-        <img id="sign-feed" src="/video_feed">
+        <!-- <img id="sign-feed" src="{{ url_for('video_feed') }}" /> -->
+        <img id="sign-feed" src="/video_feed" width="100%" height="100%">
       </div>
 
       <!-- QA -->
@@ -111,25 +111,65 @@ socket.on("transcript", t => {
 <script>
 const socket = io();
 let transcript = "";
+let slides = [];
+let currentSlide = 0;
 
-function uploadPPT() {
+function uploadPPT(){
   const file = document.getElementById("ppt").files[0];
   const formData = new FormData();
   formData.append("ppt", file);
 
-  fetch("/upload-ppt", { method:"POST", body:formData })
-  .then(res => res.json())
-  .then(data => {
-    const box = document.getElementById("pptslides");
-    box.innerHTML = "";
-    data.slides.forEach(s => {
-      const img = document.createElement("img");
-      img.src = "/uploads/slides/" + s;
-      img.style.width = "100%";
-      box.appendChild(img);
-    });
+  fetch("/upload-ppt",{method:"POST",body:formData})
+  .then(res=>res.json())
+  .then(data=>{
+    slides = data.slides;
+    currentSlide = 0;
+    showSlide();
   });
 }
+
+function showSlide(){
+  const box=document.getElementById("pptslides");
+  box.innerHTML="";
+
+  const img=document.createElement("img");
+  img.src="/uploads/"+slides[currentSlide];
+  img.style.width="100%";
+
+  const prev=document.createElement("button");
+  prev.innerText="Prev";
+  prev.onclick=()=>{
+      if(currentSlide>0){currentSlide--;showSlide();}
+  };
+
+  const next=document.createElement("button");
+  next.innerText="Next";
+  next.onclick=()=>{
+      if(currentSlide<slides.length-1){currentSlide++;showSlide();}
+  };
+
+  box.appendChild(img);
+  box.appendChild(prev);
+  box.appendChild(next);
+}
+// function uploadPPT() {
+//   const file = document.getElementById("ppt").files[0];
+//   const formData = new FormData();
+//   formData.append("ppt", file);
+
+//   fetch("/upload-ppt", { method:"POST", body:formData })
+//   .then(res => res.json())
+//   .then(data => {
+//     const box = document.getElementById("pptslides");
+//     box.innerHTML = "";
+//     data.slides.forEach(s => {
+//       const img = document.createElement("img");
+//       img.src = "/uploads/slides/" + s;
+//       img.style.width = "100%";
+//       box.appendChild(img);
+//     });
+//   });
+// }
 
 function setMode(mode) {
   fetch("/mode", {

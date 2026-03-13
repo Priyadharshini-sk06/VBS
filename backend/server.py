@@ -202,17 +202,25 @@ model = joblib.load("../ml/models/sign_model.pkl")
 # ===============================
 # TTS
 # ===============================
+VOICE_TYPE = "female"
 def speak(text):
     if not text.strip():
         return
 
     def run():
         engine = pyttsx3.init()
-        engine.setProperty("rate", 150)
+        voices = engine.getProperty('voices')
+
+        if VOICE_TYPE == "male":
+            engine.setProperty('voice', voices[0].id)
+        else:
+            engine.setProperty('voice', voices[1].id)
+
+        engine.setProperty("rate",150)
         engine.say(text)
         engine.runAndWait()
 
-    threading.Thread(target=run, daemon=True).start()
+    threading.Thread(target=run,daemon=True).start()
 
 
 
@@ -226,8 +234,14 @@ mp_draw = mp.solutions.drawing_utils
 # ===============================
 # CAMERA
 # ===============================
+# cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+# cap.set(3,640)
+# cap.set(4,480)
+# CAMERA
 cap = cv2.VideoCapture(0)
 
+if not cap.isOpened():
+    cap = cv2.VideoCapture(1)
 # ===============================
 # STATE
 # ===============================
@@ -365,10 +379,33 @@ def generate_frames():
 def home():
     return render_template("home.html")
 
+# @app.route('/choose/<mode>')
+# def choose_mode(mode):
+#     return redirect(url_for('login'))
+@app.route('/choose/<mode>')
+def choose_mode(mode):
+
+    if mode == "speech2sign":
+        return redirect(url_for("speech2sign"))
+
+    return redirect(url_for("sign2speech"))
+
+@app.route("/set-voice",methods=["POST"])
+def set_voice():
+    global VOICE_TYPE
+    VOICE_TYPE=request.json.get("voice","female")
+    return jsonify({"voice":VOICE_TYPE})
+
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "POST":
-        return redirect(url_for("sign2speech"))
+        mode = request.form.get("mode")
+
+        if mode == "speech2sign":
+            return redirect(url_for("speech2sign"))
+        else:
+            return redirect(url_for("sign2speech"))
+
     return render_template("login.html")
 
 @app.route("/register", methods=["GET","POST"])
@@ -376,6 +413,10 @@ def register():
     if request.method == "POST":
         return redirect(url_for("sign2speech"))
     return render_template("register.html")
+
+@app.route("/signquest")
+def signquest():
+    return render_template("signlearn.html")
 
 @app.route("/userguide")
 def userguide():
@@ -388,10 +429,28 @@ def connectwithus():
         return redirect(url_for("home"))
     return render_template("connectwithus.html")
 
+# @app.route("/sign2speech", methods=["GET","POST"])
+# def sign2speech():
+#     if request.method == "POST":
+#         return redirect(url_for("mode_select"))
+#     return render_template("sign2speech.html")
+
 @app.route("/sign2speech", methods=["GET","POST"])
 def sign2speech():
+    global VOICE_TYPE
+
     if request.method == "POST":
+        gender = request.form.get("gender")
+
+        if gender == "Male":
+            VOICE_TYPE = "male"
+        elif gender == "Female":
+            VOICE_TYPE = "female"
+        else:
+            VOICE_TYPE = "female"
+
         return redirect(url_for("mode_select"))
+
     return render_template("sign2speech.html")
 
 @app.route("/mode-select")
@@ -413,6 +472,16 @@ def meeting_setup():
 @app.route("/qa")
 def qa():
     return render_template("qa.html")
+
+@app.route("/tts",methods=["POST"])
+def tts():
+    data=request.json
+    speak(data["text"])
+    return jsonify({"status":"ok"})
+
+@app.route("/speech2sign")
+def speech2sign():
+    return render_template("speech2sign.html")
 
 # ===============================
 # VIDEO FEED
@@ -436,23 +505,33 @@ def set_mode():
 # ===============================
 @app.route("/upload-ppt", methods=["POST"])
 def upload_ppt():
+
     ppt = request.files["ppt"]
     ppt_path = os.path.join(UPLOAD_FOLDER, ppt.filename)
     ppt.save(ppt_path)
 
-    output_dir = os.path.join(UPLOAD_FOLDER, "slides")
-    os.makedirs(output_dir, exist_ok=True)
+    return jsonify({
+        "slides":[ppt.filename]
+    })
+# @app.route("/upload-ppt", methods=["POST"])
+# def upload_ppt():
+#     ppt = request.files["ppt"]
+#     ppt_path = os.path.join(UPLOAD_FOLDER, ppt.filename)
+#     ppt.save(ppt_path)
 
-    # Convert PPT → images (Windows needs PowerPoint installed)
-    import comtypes.client
-    powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
-    presentation = powerpoint.Presentations.Open(os.path.abspath(ppt_path))
-    presentation.SaveAs(os.path.abspath(output_dir), 17)  # 17 = JPG
-    presentation.Close()
-    powerpoint.Quit()
+#     output_dir = os.path.join(UPLOAD_FOLDER, "slides")
+#     os.makedirs(output_dir, exist_ok=True)
 
-    images = sorted(os.listdir(output_dir))
-    return jsonify({"slides": images})
+#     # Convert PPT → images (Windows needs PowerPoint installed)
+#     import comtypes.client
+#     powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
+#     presentation = powerpoint.Presentations.Open(os.path.abspath(ppt_path))
+#     presentation.SaveAs(os.path.abspath(output_dir), 17)  # 17 = JPG
+#     presentation.Close()
+#     powerpoint.Quit()
+
+#     images = sorted(os.listdir(output_dir))
+#     return jsonify({"slides": images})
 
 
 @app.route("/uploads/<path:filename>")
